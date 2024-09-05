@@ -6,3 +6,8 @@ export const checkData=(email,password)=>{
     if(user.password != password) throw new Error("Incorrect pass")
     return user
 }
+export const checkUser=(id)=>{
+    const user = users.find(u=> u.id == id)
+    if(!user) throw new Error('There are not user')
+    return user
+}
