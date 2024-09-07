@@ -1,8 +1,8 @@
 import express from 'express';
 import 'dotenv/config';
 import cookieParser from 'cookie-parser';
-import {authRouter} from './Router/auth.router.js';
-import {sessionRouter} from './Router/session.router.js';
+import {authRouter} from './router/auth.router.js';
+import {sessionRouter} from './router/session.router.js';
 const app = express()
 const PORT = process.env.PORT || 8080
 

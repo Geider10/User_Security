@@ -1,17 +1,20 @@
 import {nanoid} from 'nanoid';
-import {encryptPassword,setRol} from '../utils.js';
+import {encryptPassword} from '../utils.js';
+import {validatePartialUser} from '../schema/user.schema.js';
 
-const addUser =(user)=>{
-    const {name, password} = user
-    const newUser={
-        id: nanoid(),
-        name : name,
-        password : encryptPassword(password),
-        rol: setRol()
-    }
+export const addUser = (req,res)=>{
+    const result = validatePartialUser(req.body)
+    if(!result.success) return res.status(400).json({error: JSON.parse(result.error.message)})
     
-}
-export const userRegister = async(req,res)=>{
-    const {email, password} = req.body
-    res.status(201).json({success:'se agrego un nuevo registro'})
+    const {email, password} = result.data 
+    const newUser= {
+        id : nanoid(),
+        email: email,
+        password: encryptPassword(password),
+        rol: 'user'
+    }
+    //almacenamos en la BD
+
+    console.log(newUser);
+    res.status(201).json(newUser)
 }
