@@ -6,10 +6,11 @@ import {sessionRouter} from './router/session.router.js';
 const app = express()
 const PORT = process.env.PORT || 8080
 
-app.use(cookieParser())//leer las cookies de las peticiones
+app.use(cookieParser())//permite leer las cookies de los usuarios
 app.use(express.json())
 app.use(express.text())
 app.use(express.urlencoded({extended:true}))
+
 app.use("/auth",authRouter)
 app.use("/session",sessionRouter)
 

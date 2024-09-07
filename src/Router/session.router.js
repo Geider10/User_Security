@@ -1,12 +1,12 @@
 import {Router} from 'express';
 import {nanoid} from 'nanoid';
 import {checkData, checkUser} from '../utils.js';
-import {addUser} from '../controller/user.controller.js';
+import {create} from '../controller/user.controller.js';
 export const sessionRouter = Router()
 
 const sessionList = []//gestionar las sessiones
 sessionRouter.get('/')
-sessionRouter.post('/register',addUser)
+sessionRouter.post('/register',create)
 sessionRouter.post('/autenticado',(req,res)=>{
     const {email, password} = req.body 
     try{
