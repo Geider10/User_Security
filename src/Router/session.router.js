@@ -2,14 +2,15 @@ import {Router} from 'express';
 import {nanoid} from 'nanoid';
 import {checkData, checkUser} from '../utils.js';
 export const sessionRouter = Router()
+
 const sessionList = []//gestionar las sessiones
 sessionRouter.get('/',(req,res)=>{
     res.status(200).json({result: 'req get'})
 })
+sessionRouter.post('/register')
 sessionRouter.post('/autenticado',(req,res)=>{
     const {email, password} = req.body 
     try{
-        
         const{id} = checkData(email, password)
         //crear sessionId y enviarsela por cookie
         const sessionId = nanoid()
@@ -27,7 +28,7 @@ sessionRouter.post('/autenticado',(req,res)=>{
     }
 })
 sessionRouter.get('/profile',(req,res)=>{
-    const {cookies} = req//la cokkie se manda automatico desde el front
+    const {cookies} = req//la cookie se manda automatico desde el front luego de la autenticacion
     console.log(cookies);
     if(!cookies.sessionId) return res.status(400).json({result:'there are not cookie'})
     

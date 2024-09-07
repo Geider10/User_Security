@@ -1,4 +1,5 @@
 import {users} from './DB/users.js';
+import bcrypt from 'bcrypt';
 export const checkData=(email,password)=>{
     if(!email || !password) throw new Error("Data null")
     const user = users.find(u => u.email == email)
@@ -11,3 +12,16 @@ export const checkUser=(id)=>{
     if(!user) throw new Error('There are not user')
     return user
 }
+export const encryptPassword =  (password) =>{
+    const salt = bcrypt.genSaltSync(10)
+    const hashPassword= bcrypt.hashSync(password,salt)
+    return hashPassword
+}
+const roles = ['user','admin']
+export const setRol = ()=>{
+    let r = roles.length
+    let rolRandom = Math.floor(Math.random()* r) 
+    console.log(roles[rolRandom]);
+}
+
+
