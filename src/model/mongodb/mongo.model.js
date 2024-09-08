@@ -1,27 +1,6 @@
-import dotenv from 'dotenv';
-dotenv.config()
 import {encryptPassword,verifyPassword} from '../../utils.js';
-import {MongoClient, ObjectId, ServerApiVersion} from 'mongodb';
+import {connectDB} from './mongoClient.js';
 
-const client = new MongoClient(process.env.MONGO_URI,{
-    serverApi:{
-        version : ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors : true
-    }
-})
-async function connectDB(collectionName) {
-    try{
-        await client.connect()
-        const dataBase = client.db('Manager_User')
-        return dataBase.collection(collectionName)
-    }
-    catch (error){
-        console.error('Error conecting to the database');
-        console.error(error);
-        await client.close()
-    }
-}
 export const addUser = async(data)=>{
     const {email, password} = data
     const newUser= {

@@ -1,5 +1,11 @@
-import {users} from './DB/users.js';
 import bcrypt from 'bcrypt';
+//permite leer archivos json con modulos
+import { createRequire } from 'node:module'
+const require = createRequire(import.meta.url)
+export const readJSON = (path) => require(path)
+
+const users = readJSON('./schema/users.json')//imp y pasamos la ruta y get data
+
 export const checkData=(email,password)=>{
     if(!email || !password) throw new Error("Data null")
     const user = users.find(u => u.email == email)

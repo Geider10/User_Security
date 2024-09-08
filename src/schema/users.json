@@ -1,0 +1,14 @@
+[
+    {
+      "id": "001",
+      "email": "franco@gmail.com",
+      "password": "123456Franco",
+      "rol": "user"
+    },
+    {
+      "id": "002",
+      "email": "agustin@gamil.com",
+      "password": "123456Agustin",
+      "rol": "admin"
+    }
+  ]
