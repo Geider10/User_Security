@@ -1,5 +1,4 @@
 import express from 'express';
-import 'dotenv/config';
 import cookieParser from 'cookie-parser';
 import {authRouter} from './router/auth.router.js';
 import {sessionRouter} from './router/session.router.js';

@@ -17,6 +17,9 @@ export const encryptPassword =  (password) =>{
     const hashPassword= bcrypt.hashSync(password,salt)
     return hashPassword
 }
+export const verifyPassword = (password, hashPassword) =>{
+    return bcrypt.compareSync(password,hashPassword)//true o false
+}
 const roles = ['user','admin']
 export const setRol = ()=>{
     let r = roles.length
