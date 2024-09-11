@@ -1,20 +1,39 @@
 import {encryptPassword,verifyPassword} from '../../utils.js';
 import {connectDB} from './mongoClient.js';
 
+//para registaar no se tiene que repetir el email
+const existsUser = async (email)=>{
+    const db = await connectDB('users')
+    const isUser = await db.findOne({email : email})
+    if (isUser) {
+        console.log('Email ya registrado');
+        return true
+    }
+    else{
+        console.log('El email no está registrado');
+        return false
+    }
+}
 export const addUser = async(data)=>{
     const {email, password} = data
-    const newUser= {
-        email: email,
-        password: encryptPassword(password),
-        rol: 'admin'
+    const existingUser = await existsUser(email)
+    console.log(existingUser);
+    if(!existingUser){
+        const newUser= {
+            email: email,
+            password: await encryptPassword(password),
+            rol: 'admin'
+        }
+        const db = await connectDB('users')//hacemos la conexion
+        await db.insertOne(newUser)//almacenamos en la BD
+        //retornar solo los datos necesarios al cliente
+        return {email : newUser.email}
     }
-
-    const db = await connectDB('users')//hacemos la conexion
-    await db.insertOne(newUser)//almacenamos en la BD
-    //retornar solo los datos necesarios al cliente
-    return {...newUser }
+    else{
+        return { succes : ' this user is a database'}
+    }
 }
-export const getUserAuth = async(data)=>{
+export const getUserLogin = async(data)=>{
     const {email,password} = data
     const db = await connectDB('users')
     const user = await db.findOne({email: email})
@@ -24,10 +43,10 @@ export const getUserAuth = async(data)=>{
     if(!matchPassword)  throw new Error('Not match password with the user')
     return user
 }
-export const addSession = async(session)=>{
+export const addSession = async(sessionData)=>{
     const db = await connectDB('session_users')
-    await db.insertOne(session)
-    console.log(session);
+    await db.insertOne(sessionData)
+    console.log(sessionData);
 }
 export const getSession = async(sId)=>{
     const db = await connectDB('session_users')
@@ -35,9 +54,13 @@ export const getSession = async(sId)=>{
     if(!session) throw new Error('there are not session of user')
     return session
 }
-export const getUserById = async (id) =>{
+export const getUserById = async (uId) =>{
     const db = await connectDB('users')
-    const user = await db.findOne({_id : id})
+    const user = await db.findOne({_id : uId})
     if(!user) throw new Error('there are not user')
     return user
+}
+export const deleteSession = async (sId)=>{
+    const db = await connectDB('session_users')
+    await db.deleteOne({sessionId: sId})
 }

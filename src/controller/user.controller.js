@@ -1,6 +1,6 @@
 import {nanoid} from 'nanoid';
 import {validateUser} from '../schema/user.schema.js';
-import {addUser,getUserAuth,addSession,getSession,getUserById} from '../model/mongodb/mongo.model.js';
+import {addUser,getUserLogin,addSession,getSession,getUserById,deleteSession} from '../model/mongodb/mongo.model.js';
 export const register = async (req,res)=>{
     //valida los datos ingresados
     const result = validateUser(req.body)
@@ -16,7 +16,7 @@ export const authenticate = async (req,res) => {
     if(!result.success) return res.status(400).json({error: JSON.parse(result.error.message)})
     try{
         //revisar si el usario existe en la BD
-        const user = await getUserAuth(result.data)
+        const user = await getUserLogin(result.data)
         //crear sessionid y se lo manda al user por la cookie
         const sessionId = nanoid()
         res.cookie('sessionId',sessionId,{httpOnly: true})
@@ -27,7 +27,7 @@ export const authenticate = async (req,res) => {
     catch(error){ res.status(400).json({error:error.message})}
   
 }
- //primero hacer un authenticate y luego el authorize
+//primero hacer un login y luego el authorize
 export const authorize = async (req,res) => {
     try{
         const {cookies} = req //en toda peticion del user se manda la cookie si esta autenticado
@@ -39,4 +39,21 @@ export const authorize = async (req,res) => {
     }
     catch(error){res.status(400).json({error: error.message})}
 
+}
+//primero hacer un login y luego el logout
+export const logout = async (req,res) =>{
+    try{
+        const {cookies} = req
+        //delete sessionUser of database and delete cookie
+        if(cookies.sessionId){
+            await deleteSession(cookies.sessionId)
+            res.cookie('sessionId', '')
+            res.status(200).json({success : 'delete session od database'})
+        }
+        else{
+            res.status(200).json({success:'there is not sesiondId'})
+        }
+        
+    }
+    catch(error){res.status(400).json({error:error.message})}
 }

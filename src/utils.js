@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import { error } from 'node:console';
 //permite leer archivos json con modulos
 import { createRequire } from 'node:module'
 const require = createRequire(import.meta.url)
@@ -13,18 +14,24 @@ export const checkData=(email,password)=>{
     if(user.password != password) throw new Error("Incorrect pass")
     return user
 }
-export const checkUser=(id)=>{
-    const user = users.find(u=> u.id == id)
-    if(!user) throw new Error('There are not user')
-    return user
-}
-export const encryptPassword =  (password) =>{
+export const encryptPassword = async (password) =>{
     const salt = bcrypt.genSaltSync(10)
-    const hashPassword= bcrypt.hashSync(password,salt)
-    return hashPassword
+    try{
+        const hashPassword= await bcrypt.hash(password,salt)
+        return hashPassword
+    }
+    catch(error){
+        throw new Error('Encriptacion fallida')
+    }
 }
-export const verifyPassword = (password, hashPassword) =>{
-    return bcrypt.compareSync(password,hashPassword)//true o false
+export const verifyPassword = async (password, hashPassword) =>{
+    try{
+        const match = await bcrypt.compare(password,hashPassword)//true o false
+        return match
+    }
+    catch (e){
+        throw new Error('Verificacion fallida')
+    }
 }
 const roles = ['user','admin']
 export const setRol = ()=>{
