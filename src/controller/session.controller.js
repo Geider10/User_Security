@@ -19,7 +19,8 @@ export const authenticate = async (req,res) => {
         const user = await getUserLogin(result.data)
         //crear sessionid y se lo manda al user por la cookie
         const sessionId = nanoid()
-        res.cookie('sessionId',sessionId,{httpOnly: true})
+        res.cookie('sessionId',sessionId,{
+            httpOnly: true})
         //almacenar la sessionid del user en BD
         await addSession({sessionId: sessionId, userId: user._id})
         res.status(200).json({sessionId: sessionId, userId: user._id})
