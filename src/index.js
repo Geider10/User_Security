@@ -2,6 +2,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import {authRouter} from './router/auth.router.js';
 import {sessionRouter} from './router/session.router.js';
+
 const app = express()
 const PORT = process.env.PORT || 8080
 

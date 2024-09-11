@@ -17,7 +17,6 @@ const existsUser = async (email)=>{
 export const addUser = async(data)=>{
     const {email, password} = data
     const existingUser = await existsUser(email)
-    console.log(existingUser);
     if(!existingUser){
         const newUser= {
             email: email,
@@ -39,7 +38,7 @@ export const getUserLogin = async(data)=>{
     const user = await db.findOne({email: email})
     //check if user this in database
     if(!user) throw new Error('There are not user in database ')
-    const matchPassword = verifyPassword(password,user.password)
+    const matchPassword = await verifyPassword(password,user.password)
     if(!matchPassword)  throw new Error('Not match password with the user')
     return user
 }
