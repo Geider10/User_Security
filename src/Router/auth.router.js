@@ -1,7 +1,6 @@
 import {Router} from 'express';
-import {checkData} from '../utils.js';
 export const authRouter = Router()
-
+const checkData = (email,password) => {}
 //Endpoint para todo usuario
 authRouter.get('/',(req,res)=>{
     res.sendStatus(200)

@@ -5,17 +5,20 @@ import {__dirname} from './utils.js';
 import {authRouter} from './router/auth.router.js';
 import {sessionRouter} from './router/session.router.js';
 import {viewRouter} from './router/view.router.js';
+import cors from 'cors';
 const app = express()
 const PORT = process.env.PORT || 8080
 
-app.use(cookieParser())//permite leer el contenido de la cookies en la peticion
-app.use(express.json())
+app.use(cors())
+app.use(cookieParser())//permite cambiar el content de las cookies
+app.use(express.json())//procesa las peticiones en json
 app.use(express.text())
 app.use(express.urlencoded({extended:true}))
 
 app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
+app.use(express.static(__dirname + '/public'))
 
 app.use("/auth",authRouter)
 //las peticiones estan en unas rutas
