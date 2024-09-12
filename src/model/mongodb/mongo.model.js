@@ -42,6 +42,12 @@ export const getUserLogin = async(data)=>{
     if(!matchPassword)  throw new Error('Not match password with the user')
     return user
 }
+export const getUserByEmail = async (email) =>{
+    const db = await connectDB('users')
+    const user = await db.findOne({email: email})
+    if(!user) throw new Error('there are not user')
+    return user
+}
 export const addSession = async(sessionData)=>{
     const db = await connectDB('session_users')
     await db.insertOne(sessionData)
@@ -53,12 +59,7 @@ export const getSession = async(sId)=>{
     if(!session) throw new Error('there are not session of user')
     return session
 }
-export const getUserById = async (uId) =>{
-    const db = await connectDB('users')
-    const user = await db.findOne({_id : uId})
-    if(!user) throw new Error('there are not user')
-    return user
-}
+
 export const deleteSession = async (sId)=>{
     const db = await connectDB('session_users')
     await db.deleteOne({sessionId: sId})
