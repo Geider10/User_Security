@@ -25,7 +25,9 @@ export const login = async (req,res) => {
             })
         console.log(user);
         res.cookie('access_token',token,{
-            httpOnly : true
+            httpOnly : true,
+            secure: process.env.NODE_EVN == 'production',
+            sameSite : 'strict'
         })
         res.status(200).json({id: user._id})
     }
@@ -38,7 +40,6 @@ export const authorize = async (req,res) => {
         const token = req.cookies.access_token
         if(!token) return res.status(400).send('there is not token in the cookie')
         const data = jsonwebtoken.verify(token, process.env.PRIVATE_KEY)
-        console.log(data);
         const user = await getUserByEmail(data.email)
         //dar acceso a cierto contenido segun el rol del user
         res.status(200).json(user)
@@ -49,7 +50,6 @@ export const logout = async (req,res) =>{
     try{
         const {cookies} = req
         if(!cookies.access_token) return res.status(400).send('there is not token in the cookie')
-        //delete sessionUser of database and delete cookie
         res.clearCookie('access_token')
         res.status(200).send('delete token')
     }

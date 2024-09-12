@@ -1,19 +1,14 @@
 import bcrypt from 'bcrypt';
-import { error } from 'node:console';
-//permite leer archivos json con modulos
+//obtiene la ruta para utilizarla
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+export const __dirname = dirname(fileURLToPath(import.meta.url))
+
+//permite leer archivos json con moduls 
 import { createRequire } from 'node:module'
 const require = createRequire(import.meta.url)
-export const readJSON = (path) => require(path)
+export const readJSON = (path) => require(path)//importar y pasar ruta del json
 
-const users = readJSON('./schema/users.json')//imp y pasamos la ruta y get data
-
-export const checkData=(email,password)=>{
-    if(!email || !password) throw new Error("Data null")
-    const user = users.find(u => u.email == email)
-    if(!user) throw new Error("there are not user")
-    if(user.password != password) throw new Error("Incorrect pass")
-    return user
-}
 export const encryptPassword = async (password) =>{
     const salt = bcrypt.genSaltSync(10)
     try{
@@ -33,8 +28,9 @@ export const verifyPassword = async (password, hashPassword) =>{
         throw new Error('Verificacion fallida')
     }
 }
-const roles = ['user','admin']
+
 export const setRol = ()=>{
+    const roles = ['user','admin']
     let r = roles.length
     let rolRandom = Math.floor(Math.random()* r) 
     console.log(roles[rolRandom]);
