@@ -25,7 +25,6 @@ export const login = async (req,res) => {
             {
                 expiresIn: '1h'
             })
-        console.log(user);
         res.cookie('access_token',token,{
             httpOnly : true,
             secure: process.env.NODE_EVN == 'production',

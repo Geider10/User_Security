@@ -1,9 +1,14 @@
 <h1>LOGIN</h1>
-<form action='/users/login' method='post'>
-  Email: <input type='email' name='email' id='email' /><br><br>
-  Password: <input type='password' name='password' id='password' />
-  <input type='submit' value='INGRESAR' />
+
+<form id="loginForm">
+  <label for="email">Email:</label>
+  <input type="email" name="email" id="email" required/><br />
+
+  <label for="password">Password:</label>
+  <input type="password" name="password" id="password" required minlength="6" /><br />
+
+  <br />
+  <button type="submit">Login</button>
 </form>
 
-<h2>USUARIO NUEVO?</h2>
-<button onclick="location.href='/registro'">Ir a registro</button>
+<script src="/js/login.js"> </script>
