@@ -1,8 +1,8 @@
 <h1>REGISTRO</h1>
 
-<form id="registerForm" method="post">
+<form id="registerForm">
   <label for="email">Email:</label>
-  <input type="email" name="email" id="email" required /><br />
+  <input type="email" name="email" id="email" required/><br />
 
   <label for="password">Password:</label>
   <input type="password" name="password" id="password" required minlength="6" /><br />
@@ -11,35 +11,4 @@
   <button type="submit">SingUp</button>
 </form>
 
-<script>
-  const formId = document.getElementById('registerForm')
-  console.log(formId)
-  formId.addEventListener('submit',async function (e) {
-    e.preventDefault()
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-    console.log(typeof(email), typeof(password))
-    try{
-      const request = await fetch('http://localhost:8080/session/register',{
-        method: 'POST',
-        headers : {
-          'Content-Type':'apliccation/json'
-        },
-        body: JSON.stringify({email: email,password: password})
-      })
-      const response = await request.json()
-      console.log(response)
-
-      if(response.ok){
-        console.log('Add user')
-      }
-      else{
-        console.log(`Error : ${response.message}`)
-      }
-    }
-    catch(e){
-      console.log(e.message)
-    }
-  })
-
-</script>
+<script src="/js/register.js"> </script>

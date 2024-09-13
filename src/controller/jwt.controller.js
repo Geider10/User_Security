@@ -6,8 +6,9 @@ dotenv.config()
 
 export const register = async (req,res)=>{
     //valida los datos ingresados
-    console.log(req.body);
-    const result = validateUser(req.body)
+    const body = req.body
+    if(!body) return res.status(400).json({error : 'empty body request'})
+    const result = validateUser(body)
     if(!result.success) return res.status(400).json({error: JSON.parse(result.error.message)})
     
     const newUser = await addUser(result.data)
