@@ -11,8 +11,9 @@ export const register = async (req,res)=>{
     const result = validateUser(body)
     if(!result.success) return res.status(400).json({error: JSON.parse(result.error.message)})
     
-    const newUser = await addUser(result.data)
-    res.status(201).json(newUser)
+    await addUser(result.data)
+    res.status(202).send('Good SingUp')
+    // res.status(201).json(newUser)
 }
 export const login = async (req,res) => {
     const result = validateUser(req.body)
@@ -30,7 +31,8 @@ export const login = async (req,res) => {
             secure: process.env.NODE_EVN == 'production',
             sameSite : 'strict'
         })
-        res.status(200).json({id: user._id})
+        res.status(200).send('Good login')
+        // res.status(200).json({id: user._id})
     }
     catch(error){ res.status(400).json({error:error.message})}
   

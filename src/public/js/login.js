@@ -11,7 +11,12 @@ formId.addEventListener('submit',(e)=>{
         },
         body : JSON.stringify({email,password})
     })
-    .then(res => res.json())
-    .then(res => console.log(res))
+    .then(res =>{
+        if(res.ok){
+           setTimeout(()=>{
+            window.location.href='/view/profile'
+           },2000)
+        }
+    })
     .catch(e => console.log(e))
 })
