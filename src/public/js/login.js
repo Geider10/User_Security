@@ -14,8 +14,8 @@ formId.addEventListener('submit',(e)=>{
     .then(res =>{
         if(res.ok){
            setTimeout(()=>{
-            window.location.href='/view/profile'
-           },2000)
+            window.location.href='/profile'
+           },1000)
         }
     })
     .catch(e => console.log(e))
