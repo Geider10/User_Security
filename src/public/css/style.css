@@ -100,7 +100,7 @@ footer {
 }
 
 
-
+/* style of the forms */
 form {
     background-color: #fff;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra más definida */
@@ -146,7 +146,6 @@ button:hover {
 
 
 /* style of profile */
-/* Contenedor principal del perfil */
 .profile-container {
     max-width: 800px;
     margin: 0 auto;
@@ -242,6 +241,65 @@ button:hover {
     display: none;
 }
 
+/* style the panel */
+.admin-table-container {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de la tabla */
+.admin-table {
+    width: 70%;
+    border-collapse: collapse;
+    text-align: center;
+    border: 2px solid #ddd;
+}
+
+/* Encabezados de la tabla */
+.admin-table thead {
+    background-color: #333;
+    color: white;
+}
+
+.admin-table th, 
+.admin-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Acciones de editar y eliminar */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Botón editar */
+.edit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background-color: #45a049;
+}
+
+/* Botón eliminar */
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #e53935;
+}
 /* Ajustes responsivos */
 @media screen and (max-width: 640px) {
     .profile-content {
@@ -259,5 +317,8 @@ button:hover {
 
     .image-preview {
         height: 200px;
+    }
+    .hidden-on-mobile {
+        display: none;
     }
 }

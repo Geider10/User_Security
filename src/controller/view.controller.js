@@ -11,3 +11,6 @@ export const login =(req,res)=>{
 export const profile = (req,res)=>{
     res.render('profile')
 }
+export const panelUser = (req,res)=>{
+    res.render('panelUser')
+}
