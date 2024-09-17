@@ -1,50 +1,140 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 body {
-    font-family: Arial, sans-serif;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: #f4f4f4; /* Fondo suave */
     margin: 0;
 }
 
-h1 {
-    color: #333;
+header h1 {
+    /* color: #333; */
+    font-size: x-large;
 }
 
 form {
     background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra más definida */
+    border-radius: 10px;
+    width: 350px;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    margin: 0 auto; 
+    margin-top: 50px; 
+}
+
+.form-group {
+    margin-bottom: 15px; 
 }
 
 label {
     display: block;
     margin-bottom: 5px;
     color: #333;
+    font-weight: bold;
 }
 
 input[type="email"],
 input[type="password"] {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Más espacio entre los campos */
     border: 1px solid #ccc;
     border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
 }
-
 button {
     background-color: #4CAF50;
     color: white;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
+    width: 100%;
 }
 
+/* Efecto hover */
 button:hover {
     background-color: #45a049;
+}
+
+/* stylo para el index */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; Para asegurarte de que esté sobre otros elementos */
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    list-style: none;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.hero {
+    text-align: center;
+    margin: 100px auto 50px; /* Aumenté el margen superior para compensar el espacio del header */
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.none_tag{
+    display: none;
 }

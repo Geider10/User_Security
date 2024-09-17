@@ -1,4 +1,7 @@
 //peticion recibir el body y mandarlo a la view
+export const index = (req,res)=>{
+    res.render('index')
+}
 export const register = (req,res)=>{
     res.render('register')
 }

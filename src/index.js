@@ -24,6 +24,6 @@ app.use("/auth",authRouter)
 //las peticiones estan en unas rutas
 app.use("/session",sessionRouter)
 //las view se renderizan en otras rutas
-app.use('/view',viewRouter)
+app.use('/',viewRouter)
 
 app.listen(PORT,()=> console.log("se levanto el server"))
