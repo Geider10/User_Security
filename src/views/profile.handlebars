@@ -1,20 +1,27 @@
-<div class="profile-container">
-    <div class="profile-content">
-        <div class="profile-info">
-            <h2 class="profile-name">Nombre del usuario</h2>
-            <p class="profile-url">email del usuarios</p>
-            <span class="creation-date">Creación: 2024-09-13</span>
-        </div>
-        <div class="profile-image">
-            <div class="image-upload-container">
-                <div class="image-preview">
-                    <img id="image-preview" src="/photoUpload.webp" alt="No hay imagen cargada">
-                </div>
-                <div class="upload-controls">
-                    <label for="file-input" class="upload-btn">Imagen</label>
-                    <input id="file-input" type="file" accept="image/*" onchange="handleImgUpload(event)" />
+{{#if user}}
+    <div class="profile-container">
+        <div class="profile-content">
+            <div class="profile-info">
+                <h2 class="profile-name">Nombre {{user.name}}</h2>
+                <p class="profile-url">Email {{user.email}}</p>
+                <span class="creation-date">Creación {{user.date}}</span>
+            </div>
+            <div class="profile-image">
+                <div class="image-upload-container">
+                    <div class="image-preview">
+                        <img id="image-preview" src="/photoUpload.webp" alt="No hay imagen cargada">
+                    </div>
+                    <div class="upload-controls">
+                        <label for="file-input" class="upload-btn">Imagen</label>
+                        <input id="file-input" type="file" accept="image/*" onchange="handleImgUpload(event)" />
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+{{else}}
+    <div class="no-profile-container">
+        <p>¡Hay un Error!. Necesitas iniciar sesion para ver tu perfil.</p>
+        <a href="/login">Inciar sesion</a>
+    </div>
+{{/if}}

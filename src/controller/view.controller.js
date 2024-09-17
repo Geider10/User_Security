@@ -1,4 +1,4 @@
-//peticion recibir el body y mandarlo a la view
+//de la peticion traer la cookie para obtener los datos y mandarselo a la vista
 export const index = (req,res)=>{
     res.render('index')
 }
@@ -9,8 +9,10 @@ export const login =(req,res)=>{
     res.render('login')
 }
 export const profile = (req,res)=>{
-    res.render('profile')
+    const user = null
+    res.render('profile',{user})
 }
 export const panelUser = (req,res)=>{
-    res.render('panelUser')
+    const isAdmin = null
+    res.render('panelUser',{isAdmin})
 }

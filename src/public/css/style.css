@@ -247,16 +247,12 @@ button:hover {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-/* Estilos de la tabla */
 .admin-table {
     width: 70%;
     border-collapse: collapse;
     text-align: center;
     border: 2px solid #ddd;
 }
-
-/* Encabezados de la tabla */
 .admin-table thead {
     background-color: #333;
     color: white;
@@ -267,15 +263,11 @@ button:hover {
     padding: 10px;
     border: 1px solid #ddd;
 }
-
-/* Acciones de editar y eliminar */
 .actions {
     display: flex;
     justify-content: center;
     gap: 10px;
 }
-
-/* Botón editar */
 .edit-btn {
     background-color: #4CAF50;
     color: white;
@@ -287,8 +279,6 @@ button:hover {
 .edit-btn:hover {
     background-color: #45a049;
 }
-
-/* Botón eliminar */
 .delete-btn {
     background-color: #f44336;
     color: white;
@@ -300,7 +290,40 @@ button:hover {
 .delete-btn:hover {
     background-color: #e53935;
 }
-/* Ajustes responsivos */
+
+/* modal no hay perfil */
+.no-profile-container{
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra más definida */
+    border-radius: 10px;
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+}
+.no-profile-container p{
+    margin-bottom: 10px;
+}
+.no-profile-container a{
+    background-color: #4CAF50;
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    width: 100%;
+}
+/* modal no tienes acceso al panel */
+.no-admin-container{
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra más definida */
+    border-radius: 10px;
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+}
 @media screen and (max-width: 640px) {
     .profile-content {
         flex-direction: column;
