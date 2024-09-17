@@ -35,15 +35,17 @@ header {
 header h1 {
     font-size: x-large;
 }
-header h1 a{
+header .btn-dynamic{
     color: #fff;
-    text-align: none;
     text-decoration: none;
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 5px 10px;
 }
 nav ul {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
     text-decoration: none;
     list-style: none;
 }
@@ -51,9 +53,6 @@ nav ul {
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    border: 1px solid;
-    border-radius: 20px;
-    padding: 5px;
 }
 
 .hero {
@@ -141,8 +140,124 @@ button {
     font-size: 16px;
     width: 100%;
 }
-
-/* Efecto hover */
 button:hover {
     background-color: #45a049;
+}
+
+
+/* style of profile */
+/* Contenedor principal del perfil */
+.profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenido del perfil */
+.profile-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Información del perfil */
+.profile-info {
+    width: 60%;
+}
+
+.profile-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.profile-url {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.creation-date {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Imagen de perfil y carga de imágenes */
+.profile-image {
+    width: 35%;
+}
+
+.image-upload-container {
+    text-align: center;
+    height: auto;
+}
+
+/* Vista previa de la imagen */
+.image-preview {
+    height: 150px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.image-preview img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Controles de carga de imagen */
+.upload-controls {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-controls label {
+    cursor: pointer;
+}
+
+.upload-btn {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.upload-btn:hover {
+    background-color: #45a049;
+}
+
+#file-input {
+    display: none;
+}
+
+/* Ajustes responsivos */
+@media screen and (max-width: 640px) {
+    .profile-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-info {
+        width: 100%;
+    }
+
+    .profile-image {
+        width: 100%;
+    }
+
+    .image-preview {
+        height: 200px;
+    }
 }
