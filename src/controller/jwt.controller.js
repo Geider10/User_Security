@@ -1,12 +1,12 @@
 import jsonwebtoken from 'jsonwebtoken';
 import {validateUser} from '../schema/user.schema.js';
-import {addUser,getUserLogin,getUserByEmail,} from '../model/mongodb/mongo.model.js';
+import {addUser,getUserLogin} from '../model/mongodb/mongo.model.js';
 import dotenv from 'dotenv';
 dotenv.config()
 
 export const register = async (req,res)=>{
     //valida los datos ingresados
-    const result = validateUser(body)
+    const result = validateUser(req.body)
     if(!result.success) return res.status(400).json({error: JSON.parse(result.error.message)})
     //el usuario recibe bien/mal y ejecuta una accion
     const userData = await addUser(result.data)
@@ -33,18 +33,6 @@ export const login = async (req,res) => {
     }
     catch(error){ res.status(400).json({error:error.message})}
   
-}
-//hacer login y luego un autorizado
-export const authorize = async (req,res) => {
-    try{
-        const token = req.cookies.access_token
-        if(!token) return res.status(400).send('there is not token in the cookie')
-        const data = jsonwebtoken.verify(token, process.env.PRIVATE_KEY)
-        const user = await getUserByEmail(data.email)
-        //dar acceso a cierto contenido segun el rol del user
-        res.status(200).json(user)
-    }
-    catch(error){res.status(400).json({error: error.message})}
 }
 export const logout = async (req,res) =>{
     try{

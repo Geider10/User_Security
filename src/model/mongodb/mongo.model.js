@@ -21,7 +21,7 @@ export const addUser = async(data)=>{
         const newUser= {
             email: email,
             password: await encryptPassword(password),
-            rol: 'user'
+            rol: 'admin'
         }
         const db = await connectDB('users')//hacemos la conexion
         await db.insertOne(newUser)//almacenamos en la BD
@@ -32,6 +32,13 @@ export const addUser = async(data)=>{
         //retorna mal
         return { error : 'the user this in database'}
     }
+}
+export const getAllUser =  async()=>{
+    const db = await connectDB('users')
+    const users = await db.find()
+    if(!users) throw new Error('There are no users')
+    console.log(users.documents);
+    return users
 }
 export const getUserLogin = async(data)=>{
     const {email,password} = data
@@ -47,7 +54,7 @@ export const getUserByEmail = async (email) =>{
     const db = await connectDB('users')
     const user = await db.findOne({email: email})
     if(!user) throw new Error('there are not user')
-    return user
+    return {email: user.email, rol : user.rol}
 }
 export const addSession = async(sessionData)=>{
     const db = await connectDB('session_users')
