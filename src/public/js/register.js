@@ -14,7 +14,7 @@ formId.addEventListener('submit', (e) => {
   .then(res => res.json())
   .then(res => {
     console.log(res);
-    if(!res.error){
+    if(res.success){
       setTimeout(()=>{
         window.location.href = '/login'
       },1000)

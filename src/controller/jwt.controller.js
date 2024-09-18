@@ -6,8 +6,6 @@ dotenv.config()
 
 export const register = async (req,res)=>{
     //valida los datos ingresados
-    const body = req.body
-    if(!body) return res.status(400).json({error : 'empty body request'})
     const result = validateUser(body)
     if(!result.success) return res.status(400).json({error: JSON.parse(result.error.message)})
     //el usuario recibe bien/mal y ejecuta una accion
@@ -20,7 +18,7 @@ export const login = async (req,res) => {
     if(!result.success) return res.status(400).json({error: JSON.parse(result.error.message)})
     try{
         const user = await getUserLogin(result.data)
-        //crear token and enviarlo por el cookie
+        //crear el token y enviarlo por la cookie
         const token = jsonwebtoken.sign({email: user.email},
             process.env.PRIVATE_KEY,
             {
@@ -31,8 +29,7 @@ export const login = async (req,res) => {
             secure: process.env.NODE_EVN == 'production',
             sameSite : 'strict'
         })
-        res.status(200).send('Good login')
-        // res.status(200).json({id: user._id})
+        res.status(200).json({success: 'login existoso'})
     }
     catch(error){ res.status(400).json({error:error.message})}
   
