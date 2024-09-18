@@ -12,24 +12,21 @@ export const login =(req,res)=>{
 }
 export const profile = async (req,res)=>{
     const emailUser = req.params.userId
-    const user = await getUserByEmail(emailUser)
-    console.log(user);
-    if(user){
+    try{
+        const user = await getUserByEmail(emailUser)
         res.render('profile',{user})
     }
-    else{
-        res.render('profile',{})
-    }
+    catch (e){ res.render('profile')}
 }
 export const panelUser = async (req,res)=>{
     const emailUser = req.params.userId
-    const user = await getUserByEmail(emailUser)
-    if(user.rol == 'admin'){
-        const allUsers = await getAllUser()
-        console.log(allUsers.documents);
-        res.render('panelUser',{allUsers})
+    try{
+        const user = await getUserByEmail(emailUser)
+        if(user.rol == 'admin'){
+            const allUsers = await getAllUser()
+            console.log(allUsers);
+            res.render('panelUser',{allUsers})
+        }
     }
-    else{
-        res.render('panelUser',{allUsers})
-    }
+    catch(e){res.render('panelUser')}
 }

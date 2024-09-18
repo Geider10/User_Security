@@ -12,8 +12,8 @@
                 <!-- Ejemplo de datos, puedes reemplazar con los datos dinámicos -->
                 {{#each allUsers}}
                     <tr>
-                        <td>{{allUsers.email}}</td>
-                        <td class="hidden-on-mobile">{{allUsers.rol}}</td>
+                        <td>{{this.email}}</td>
+                        <td class="hidden-on-mobile">{{this.rol}}</td>
                         <td>
                             <div class="actions">
                                 <span class="edit-btn">Editar</span>

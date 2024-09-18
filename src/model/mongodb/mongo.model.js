@@ -35,9 +35,8 @@ export const addUser = async(data)=>{
 }
 export const getAllUser =  async()=>{
     const db = await connectDB('users')
-    const users = await db.find()
-    if(!users) throw new Error('There are no users')
-    console.log(users.documents);
+    const users = await db.find({}).toArray()//conviere el cursor en un array
+    if(users.length === 0) throw new Error('There are no users')
     return users
 }
 export const getUserLogin = async(data)=>{
