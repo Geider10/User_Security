@@ -10,10 +10,10 @@ export const register = async (req,res)=>{
     if(!body) return res.status(400).json({error : 'empty body request'})
     const result = validateUser(body)
     if(!result.success) return res.status(400).json({error: JSON.parse(result.error.message)})
+    //el usuario recibe bien/mal y ejecuta una accion
+    const userData = await addUser(result.data)
+    res.status(202).json(userData)
     
-    await addUser(result.data)
-    res.status(202).send('Good SingUp')
-    // res.status(201).json(newUser)
 }
 export const login = async (req,res) => {
     const result = validateUser(req.body)

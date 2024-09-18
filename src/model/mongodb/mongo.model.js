@@ -6,7 +6,7 @@ const existsUser = async (email)=>{
     const db = await connectDB('users')
     const isUser = await db.findOne({email : email})
     if (isUser) {
-        console.log('Email ya registrado');
+        console.log('Email ya esta registrado');
         return true
     }
     else{
@@ -21,15 +21,16 @@ export const addUser = async(data)=>{
         const newUser= {
             email: email,
             password: await encryptPassword(password),
-            rol: 'admin'
+            rol: 'user'
         }
         const db = await connectDB('users')//hacemos la conexion
         await db.insertOne(newUser)//almacenamos en la BD
-        //retornar solo los datos necesarios al cliente
-        return {email : newUser.email}
+        //retorna bien 
+        return {success: 'add user in database'}
     }
     else{
-        return { succes : ' this user is a database'}
+        //retorna mal
+        return { error : 'the user this in database'}
     }
 }
 export const getUserLogin = async(data)=>{

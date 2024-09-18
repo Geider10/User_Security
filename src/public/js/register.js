@@ -1,5 +1,4 @@
 const formId = document.getElementById('registerForm')
-console.log(formId)
 formId.addEventListener('submit', (e) => {
   e.preventDefault()
   const email = document.getElementById('email').value
@@ -12,9 +11,10 @@ formId.addEventListener('submit', (e) => {
       },
       body: JSON.stringify({email,password})
     })
+  .then(res => res.json())
   .then(res => {
     console.log(res);
-    if(res.ok){
+    if(!res.error){
       setTimeout(()=>{
         window.location.href = '/login'
       },1000)
