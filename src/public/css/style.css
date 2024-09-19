@@ -4,18 +4,11 @@
     box-sizing: border-box;
 }
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-    background-color: #f4f4f4; /* Fondo suave */
-    margin: 0;
+    background-color: #f4f4f4;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 
-/* stylo para el index */
 header {
     background-color: #2f91d3;
     color: #fff;
@@ -24,16 +17,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    /* position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000; Para asegurarte de que esté sobre otros elementos */
-}
-header h1 {
-    font-size: x-large;
 }
 header .btn-dynamic{
     color: #fff;
@@ -42,23 +25,67 @@ header .btn-dynamic{
     border-radius: 20px;
     padding: 5px 10px;
 }
-nav ul {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    text-decoration: none;
-    list-style: none;
+header h1{
+    font-size: x-large;
 }
-
-nav ul li a {
+header a {
     color: #fff;
     text-decoration: none;
 }
+/* .dropdown */
+.dropdown {
+    position: relative;
+    display: none;
+}
+.dropdown-toggle {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 0 10px;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 10px 0;
+    min-width: 150px;
+    z-index: 1;
+}
 
+.dropdown-menu.active {
+    display: block;
+}
+
+.dropdown-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu ul li {
+    padding: 6px 12px;
+}
+
+.dropdown-menu ul li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu ul li a:hover {
+    background-color: #d4d3d3;
+    border-radius: 4px;
+}
+/* index style */
 .hero {
-    text-align: center;
-    margin: 100px auto 50px; /* Aumenté el margen superior para compensar el espacio del header */
+    margin: 200px auto;
     max-width: 600px;
+    text-align: center;
 }
 
 .hero h1 {
@@ -101,6 +128,10 @@ footer {
 
 
 /* style of the forms */
+.titleForm{
+    text-align: center;
+    margin-top: 50px;
+}
 form {
     background-color: #fff;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra más definida */
@@ -130,7 +161,7 @@ input[type="password"] {
     padding: 10px;
     font-size: 16px;
 }
-button {
+.btnForm {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -140,22 +171,17 @@ button {
     font-size: 16px;
     width: 100%;
 }
-button:hover {
-    background-color: #45a049;
-}
 
 
 /* style of profile */
 .profile-container {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 500px;
+    margin: 180px auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-/* Contenido del perfil */
 .profile-content {
     display: flex;
     justify-content: space-between;
@@ -243,12 +269,14 @@ button:hover {
 
 /* style the panel */
 .admin-table-container {
+    max-width: 700px;
+    margin: 50px auto;
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .admin-table {
-    width: 70%;
+    width: 100%;
     border-collapse: collapse;
     text-align: center;
     border: 2px solid #ddd;
@@ -291,30 +319,6 @@ button:hover {
     background-color: #e53935;
 }
 
-/* modal no hay perfil */
-.no-profile-container{
-    background-color: #fff;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra más definida */
-    border-radius: 10px;
-    width: 300px;
-    padding: 20px;
-    text-align: center;
-}
-.no-profile-container p{
-    margin-bottom: 10px;
-}
-.no-profile-container a{
-    background-color: #4CAF50;
-    text-decoration: none;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    display: block;
-    width: 100%;
-}
 /* modal no tienes acceso al panel */
 .no-admin-container{
     background-color: #fff;
@@ -323,6 +327,8 @@ button:hover {
     width: 300px;
     padding: 20px;
     text-align: center;
+    margin: 200px auto;
+
 }
 @media screen and (max-width: 640px) {
     .profile-content {
