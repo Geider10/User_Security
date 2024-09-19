@@ -16,8 +16,15 @@ export const connectDB= async (collectionName)=>{
         return dataBase.collection(collectionName)
     }
     catch (error){
-        console.error('Error conecting to the database');
-        console.error(error);
         await client.close()
+        console.error('error connecting with the database');
+    }
+}
+export const closeConecction = async()=>{
+    try{
+        await client.close()
+    }
+    catch(e){
+        console.error('error closing connection with the database');
     }
 }

@@ -16,7 +16,9 @@ export const profile = async (req,res)=>{
         const user = await getUserByEmail(emailUser)
         res.render('profile',{user})
     }
-    catch (e){ res.render('profile')}
+    catch (e){ 
+        res.json({error: error.message})
+    }
 }
 export const panelUser = async (req,res)=>{
     const emailUser = req.params.userId
@@ -24,9 +26,13 @@ export const panelUser = async (req,res)=>{
         const user = await getUserByEmail(emailUser)
         if(user.rol == 'admin'){
             const allUsers = await getAllUser()
-            console.log(allUsers);
             res.render('panelUser',{allUsers})
         }
+        else{
+            res.render('panelUser',{})
+        }
     }
-    catch(e){res.render('panelUser')}
+    catch(e){
+        res.json({error: error.message})
+    }
 }
