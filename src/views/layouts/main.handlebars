@@ -23,7 +23,7 @@
                     <ul>
                         <li><a href="/user/profile">Perfil</a></li>
                         <li><a href="/user/panel">Panel</a></li>
-                        <li><a href="/user/logout">Logout</a></li>
+                        <li><span id="btn-logout">Logout</span></li>
                     </ul>
                 </div>
             </div>
@@ -43,6 +43,23 @@
         const menu = document.getElementById('dropdown-menu');
         menu.classList.toggle('active');
     }
+    function setLogout (){
+        fetch('/user/logout',{
+            method: 'POST'
+        })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+            if(res.success){
+                window.location.href = '/'
+                console.log('se elimino el token')
+            }
+        })
+        .catch(e => console.log(e))
+    }
     const btnToggle = document.querySelector('.dropdown-toggle')
     btnToggle.addEventListener('click',toggleMenu)
+
+    const btnLogout = document.getElementById('btn-logout')
+    btnLogout.addEventListener('click',setLogout)
 </script>

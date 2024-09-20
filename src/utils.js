@@ -28,12 +28,3 @@ export const verifyPassword = async (password, hashPassword) =>{
         throw new Error('Verificacion fallida')
     }
 }
-
-export const setRol = ()=>{
-    const roles = ['user','admin']
-    let r = roles.length
-    let rolRandom = Math.floor(Math.random()* r) 
-    console.log(roles[rolRandom]);
-}
-
-

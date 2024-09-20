@@ -34,12 +34,3 @@ export const login = async (req,res) => {
     catch(error){ res.status(400).json({error:error.message})}
   
 }
-export const logout = async (req,res) =>{
-    try{
-        const {cookies} = req
-        if(!cookies.access_token) return res.status(400).send('there is not token in the cookie')
-        res.clearCookie('access_token')
-        res.status(200).send('delete token')
-    }
-    catch(error){res.status(400).json({error:error.message})}
-}
