@@ -8,13 +8,15 @@
         <div class="profile-image">
             <div class="image-upload-container">
                 <div class="image-preview">
-                    <img id="image-preview" src="/photoUpload.webp" alt="No hay imagen cargada">
+                    <img id="image-preview" src={{user.img}} alt="No hay imagen cargada">
                 </div>
                 <div class="upload-controls">
                     <label for="file-input" class="upload-btn">Imagen</label>
-                    <input id="file-input" type="file" accept="image/*" onchange="handleImgUpload(event)" />
+                    <input id="file-input" type="file" accept="image/*" />
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script src="/js/profile.js"></script>

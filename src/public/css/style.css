@@ -19,8 +19,6 @@ header {
     align-items: center;
 }
 header .btn-dynamic{
-    color: #fff;
-    text-decoration: none;
     border: 1px solid;
     border-radius: 20px;
     padding: 5px 10px;
@@ -31,11 +29,12 @@ header h1{
 header a {
     color: #fff;
     text-decoration: none;
+    display: inline-block;
 }
 /* .dropdown */
 .dropdown {
     position: relative;
-    display: none;
+    display: inline-block;
 }
 .dropdown-toggle {
     background-color: transparent;

@@ -16,7 +16,7 @@
             {{!-- ruta y el valor son dinamicos, segun la vista --}}
             <a href="/register" class="btn-dynamic">Registrarse</a>
             <div class="dropdown">
-                <button class="dropdown-toggle" onclick="toggleMenu()">
+                <button class="dropdown-toggle">
                     <span>▼</span> <!-- Flecha para activar el menú -->
                 </button>
                 <div id="dropdown-menu" class="dropdown-menu">
@@ -43,4 +43,6 @@
         const menu = document.getElementById('dropdown-menu');
         menu.classList.toggle('active');
     }
+    const btnToggle = document.querySelector('.dropdown-toggle')
+    btnToggle.addEventListener('click',toggleMenu)
 </script>

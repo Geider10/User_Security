@@ -55,6 +55,11 @@ export const getUserByEmail = async (email) =>{
     if(!user) throw new Error('there are not user')
     return {email: user.email, rol : user.rol}
 }
+export const changeImg = async (email,img)=>{
+    const user = await getUserByEmail(email)
+    const db = await connectDB('users')
+    db.updateOne({email:email},{...user,img: img})
+}
 export const addSession = async(sessionData)=>{
     const db = await connectDB('session_users')
     await db.insertOne(sessionData)
