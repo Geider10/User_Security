@@ -3,13 +3,13 @@ import cookieParser from 'cookie-parser';
 import handlebars from 'express-handlebars';
 import {__dirname} from './utils.js';
 import {authRouter} from './router/auth.router.js';
-import {sessionRouter} from './router/session.router.js';
 import {viewRouter} from './router/view.router.js';
+import {userRouter} from './router/user.router.js';
 import cors from 'cors';
 const app = express()
 const PORT = process.env.PORT || 8080
 
-app.use(express.json())//procesa las peticiones en json
+app.use(express.json())
 app.use(express.text())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())//permite cambiar el content de las cookies
@@ -20,10 +20,9 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 app.use(express.static(__dirname + '/public'))
 
-app.use("/auth",authRouter)
-//las peticiones estan en unas rutas
-app.use("/session",sessionRouter)
-//las view se renderizan en otras rutas
-app.use('/',viewRouter)
+
+app.use('/',viewRouter)//las view for auth
+app.use("/auth",authRouter)//las request for auth
+app.use('/user',userRouter)//view and reques for user
 
 app.listen(PORT,()=> console.log("se levanto el server"))

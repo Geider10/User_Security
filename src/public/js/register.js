@@ -4,7 +4,7 @@ formId.addEventListener('submit', (e) => {
   const email = document.getElementById('email').value
   const password = document.getElementById('password').value
   //peticiones locales/mismo_servidor no hace falta el puerto
-  fetch('/session/register',{
+  fetch('/auth/register',{
       method: 'POST',
       headers : {
         'Content-Type':'application/json'

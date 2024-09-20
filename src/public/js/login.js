@@ -4,7 +4,7 @@ formId.addEventListener('submit',(e)=>{
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
 
-    fetch('/session/login',{
+    fetch('/auth/login',{
         method : 'POST',
         headers: {
             'Content-Type' : 'application/json'
@@ -16,7 +16,7 @@ formId.addEventListener('submit',(e)=>{
         console.log(res);
         if(res.success){
            setTimeout(()=>{
-            window.location.href='/profile'
+            window.location.href='/user/profile'
            },1000)
         }
     })
