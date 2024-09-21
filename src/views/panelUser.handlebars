@@ -25,7 +25,15 @@
             </tbody>
         </table>
     </div>
-{{else}}
+{{/if}}
+
+{{#if noUsers}}
+    <div class="no-admin-container">
+        <p>¡No hay usuarios registrados!.</p>
+    </div>
+{{/if}}
+
+{{#if noAdmin}}
     <div class="no-admin-container">
         <p>¡Hay un Error!. No tienes permiso al panel, necesitas ser administrador.</p>
     </div>

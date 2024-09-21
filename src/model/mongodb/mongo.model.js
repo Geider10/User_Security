@@ -18,47 +18,52 @@ export const addUser = async(data)=>{
     const existingUser = await existsUser(email)
     if(!existingUser){
         const newUser= {
+            name: 'My name',
             email: email,
             password: await encryptPassword(password),
-            rol: 'admin'
+            rol: 'user'
         }
         const db = await connectDB('users')//hacemos la conexion
         await db.insertOne(newUser)//almacenamos en la BD
-        //retorna bien 
+        await closeDB()
         return {success: 'add user in database'}
     }
     else{
-        //retorna mal
-        return { error : 'the user this in database'}
+        return { success : 'the user this in database'}
     }
-}
-export const getAllUser =  async()=>{
-    const db = await connectDB('users')
-    const users = await db.find({}).toArray()//conviere el cursor en un array
-    if(users.length === 0) throw new Error('There are no users')
-    return users
 }
 export const getUserLogin = async(data)=>{
     const {email,password} = data
     const db = await connectDB('users')
     const user = await db.findOne({email: email})
-    //check if user this in database
+    await closeDB()
+    //check if user this in database 
     if(!user) throw new Error('There are not user in database ')
     const matchPassword = await verifyPassword(password,user.password)
     if(!matchPassword)  throw new Error('Not match password with the user')
-    return user
+    return {id : user._id}
 }
-export const getUserByEmail = async (email) =>{
+export const getUserId = async (idUser)=>{
     const db = await connectDB('users')
-    const user = await db.findOne({email: email})
-    if(!user) throw new Error('there are not user')
-    return {email: user.email, rol : user.rol}
+    const user = await db.findOne({_id : convertObjectId(idUser)})
+    await closeDB()
+    if(!user) throw new Error('No hay user')
+    return user 
 }
+export const getAllUser =  async(typeUser)=>{
+    const db = await connectDB('users')
+    const users = await db.find({rol:typeUser}).toArray()
+    await closeDB()
+    return users
+}
+//acciones del profile user
 export const changeImg = async (email,img)=>{
     const user = await getUserByEmail(email)
     const db = await connectDB('users')
     db.updateOne({email:email},{...user,img: img})
 }
+
+//manejar las sessiones de los usuarios en database
 export const addSession = async(sessionData)=>{
     const db = await connectDB('session_users')
     await db.insertOne(sessionData)
@@ -74,11 +79,4 @@ export const getSession = async(sId)=>{
 export const deleteSession = async (sId)=>{
     const db = await connectDB('session_users')
     await db.deleteOne({sessionId: sId})
-}
-export const getUserId = async (idUser)=>{
-    const db = await connectDB('users')
-    const user = await db.findOne({_id : convertObjectId(idUser)})
-    await closeDB()
-    if(!user) throw new Error('No hay user')
-    return user 
 }

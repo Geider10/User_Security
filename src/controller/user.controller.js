@@ -1,31 +1,39 @@
-//de la peticion traer la cookie para obtener los datos y mandarselo a la vista
-import {getUserByEmail,getAllUser,getUserId} from '../model/mongodb/mongo.model.js';
+//obtener el idUser del parms/cookie y render views
+import {getAllUser,getUserId} from '../model/mongodb/mongo.model.js';
 export const setProfile = async (req,res)=>{
-    const emailUser = req.params.userId
+    const idUser = req.params.userId
     try{
-        const user = await getUserByEmail(emailUser)
+        const user = await getUserId(idUser)
         res.render('profile',{user})
     }
     catch (e){ 
-        res.json({error: error.message})
+        res.json({error: e.message})
     }
 }
 export const setPanelControll = async (req,res)=>{
-    const emailUser = req.params.userId
+    const idUser = req.params.userId
     try{
-        const user = await getUserByEmail(emailUser)
+        const user = await getUserId(idUser)
         if(user.rol == 'admin'){
-            const allUsers = await getAllUser()
-            res.render('panelUser',{allUsers})
+            const allUsers = await getAllUser('user')
+            if(allUsers.length >= 1){
+                res.render('panelUser',{allUsers})
+            }
+            else{
+                const noUsers =  true
+                res.render('panelUser',{noUsers})
+            }
         }
         else{
-            res.render('panelUser',{})
+            const noAdmin = true
+            res.render('panelUser', {noAdmin})
         }
     }
     catch(e){
-        res.json({error: error.message})
+        res.json({error: e.message})
     }
 }
+//solo peticiones
 export const setLogout = async (req,res) =>{
     try{
         const {cookies} = req
@@ -35,13 +43,4 @@ export const setLogout = async (req,res) =>{
         res.status(200).json({success: 'delete access_token'})
     }
     catch(error){res.status(400).json({error:error.message})}
-}
-
-export const setId = async(req,res)=>{
-    const data = req.body
-    try{
-        const user = await getUserId(data._id)
-        res.status(200).json(user)
-    }
-    catch(e){ res.status(400).json({error:e.message}) }
 }
