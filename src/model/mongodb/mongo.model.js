@@ -1,6 +1,5 @@
 import {encryptPassword,verifyPassword} from '../../utils.js';
-import {connectDB} from './mongoClient.js';
-
+import {connectDB,closeDB,convertObjectId} from './mongoClient.js';
 //para registaar no se tiene que repetir el email
 const existsUser = async (email)=>{
     const db = await connectDB('users')
@@ -75,4 +74,11 @@ export const getSession = async(sId)=>{
 export const deleteSession = async (sId)=>{
     const db = await connectDB('session_users')
     await db.deleteOne({sessionId: sId})
+}
+export const getUserId = async (idUser)=>{
+    const db = await connectDB('users')
+    const user = await db.findOne({_id : convertObjectId(idUser)})
+    await closeDB()
+    if(!user) throw new Error('No hay user')
+    return user 
 }

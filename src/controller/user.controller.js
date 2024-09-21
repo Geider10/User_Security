@@ -1,5 +1,5 @@
 //de la peticion traer la cookie para obtener los datos y mandarselo a la vista
-import {getUserByEmail,getAllUser} from '../model/mongodb/mongo.model.js';
+import {getUserByEmail,getAllUser,getUserId} from '../model/mongodb/mongo.model.js';
 export const setProfile = async (req,res)=>{
     const emailUser = req.params.userId
     try{
@@ -35,4 +35,13 @@ export const setLogout = async (req,res) =>{
         res.status(200).json({success: 'delete access_token'})
     }
     catch(error){res.status(400).json({error:error.message})}
+}
+
+export const setId = async(req,res)=>{
+    const data = req.body
+    try{
+        const user = await getUserId(data._id)
+        res.status(200).json(user)
+    }
+    catch(e){ res.status(400).json({error:e.message}) }
 }

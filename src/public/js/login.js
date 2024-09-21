@@ -16,7 +16,7 @@ formId.addEventListener('submit',(e)=>{
         console.log(res);
         if(res.success){
            setTimeout(()=>{
-            window.location.href='/user/profile'
+            window.location.href='/'
            },1000)
         }
     })
