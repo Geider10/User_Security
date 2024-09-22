@@ -57,12 +57,18 @@ export const getAllUser =  async(typeUser)=>{
     return users
 }
 //acciones del profile user
-export const changeImg = async (email,img)=>{
-    const user = await getUserByEmail(email)
+export const editUser = async (idUser,data)=>{
     const db = await connectDB('users')
-    db.updateOne({email:email},{...user,img: img})
+    const user = await db.findOne({_id:convertObjectId(idUser)})
+    if(!user) throw new Error('no found user')
+    for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+            user[key] = data[key]
+        }
+    }
+    await db.updateOne({_id:convertObjectId(idUser)}, {$set: user} )
+    await closeDB()
 }
-
 //manejar las sessiones de los usuarios en database
 export const addSession = async(sessionData)=>{
     const db = await connectDB('session_users')

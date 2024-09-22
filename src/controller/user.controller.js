@@ -1,5 +1,5 @@
 //obtener el idUser del parms/cookie y render views
-import {getAllUser,getUserId} from '../model/mongodb/mongo.model.js';
+import {getAllUser,getUserId,editUser} from '../model/mongodb/mongo.model.js';
 export const setProfile = async (req,res)=>{
     const idUser = req.params.userId
     try{
@@ -34,13 +34,19 @@ export const setPanelControll = async (req,res)=>{
     }
 }
 //solo peticiones
-export const setLogout = async (req,res) =>{
+export const logout = async (req,res) =>{
+    const {cookies} = req
+    //not token return a response from router
+    if(!cookies.access_token) return res.status(400).send('there is not token in the cookie')
+    res.clearCookie('access_token')
+    res.status(200).json({success: 'delete access_token'})
+}
+export const editProfile = async (req,res)=>{
+    const userId = req.params.userId
+    const data = req.body
     try{
-        const {cookies} = req
-        //not token return a response from router
-        if(!cookies.access_token) return res.status(400).send('there is not token in the cookie')
-        res.clearCookie('access_token')
-        res.status(200).json({success: 'delete access_token'})
+        await editUser(userId,data)
+        res.status(200).json({success: 'se edito el user'})
     }
-    catch(error){res.status(400).json({error:error.message})}
+    catch(e){ res.status(400).json({error: e.message})}
 }

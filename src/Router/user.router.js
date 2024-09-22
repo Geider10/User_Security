@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {setProfile,setPanelControll,setLogout} from '../controller/user.controller.js';
+import {setProfile,setPanelControll,logout,editProfile} from '../controller/user.controller.js';
 import {verifyToken} from '../middleware/auth.middleware.js';
 export const userRouter = Router()
 
@@ -7,6 +7,7 @@ export const userRouter = Router()
 userRouter.get('/profile',verifyToken,setProfile)
 userRouter.get('/panel',verifyToken,setPanelControll)
 //only request when user is login
-userRouter.post('/logout',verifyToken,setLogout)
+userRouter.post('/logout',verifyToken,logout)
+userRouter.post('/',verifyToken,editProfile)
 
 
