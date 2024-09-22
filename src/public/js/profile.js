@@ -1,4 +1,4 @@
-//solo el user manda el file
+//solo el user manda el file, no se puede mandar files pesados
 const handleLoadImg = async (e)=>{
     e.preventDefault()
     const file = e.target.files[0]

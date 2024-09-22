@@ -1,5 +1,4 @@
 import {getAllUser,getUserId,editUser} from '../model/mongodb/mongo.model.js';
-import sharp from 'sharp';
 //obtener el idUser del parms/cookie y render views
 export const setProfile = async (req,res)=>{
     const idUser = req.params.userId
