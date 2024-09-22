@@ -13,7 +13,7 @@ const existsUser = async (email)=>{
         return false
     }
 }
-export const addUser = async(data)=>{
+export const registerUser = async(data)=>{
     const {email, password} = data
     const existingUser = await existsUser(email)
     if(!existingUser){
@@ -32,7 +32,7 @@ export const addUser = async(data)=>{
         return { success : 'the user this in database'}
     }
 }
-export const getUserLogin = async(data)=>{
+export const loginUser = async(data)=>{
     const {email,password} = data
     const db = await connectDB('users')
     const user = await db.findOne({email: email})

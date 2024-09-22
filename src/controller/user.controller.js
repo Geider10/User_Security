@@ -1,5 +1,6 @@
-//obtener el idUser del parms/cookie y render views
 import {getAllUser,getUserId,editUser} from '../model/mongodb/mongo.model.js';
+import sharp from 'sharp';
+//obtener el idUser del parms/cookie y render views
 export const setProfile = async (req,res)=>{
     const idUser = req.params.userId
     try{
@@ -49,4 +50,24 @@ export const editProfile = async (req,res)=>{
         res.status(200).json({success: 'se edito el user'})
     }
     catch(e){ res.status(400).json({error: e.message})}
+}
+export const changeImg = async(req,res) => {
+    const userId = req.params.userId
+    const img = req.body
+    console.log(userId);
+    try{
+        //convertir la img a buffer para usar sharp
+        const imgBuffer = Buffer.from(img.split(','[1],'base64'))
+        //comprimir img y convertirla a formato wbp
+        const compressedImageBuffer = await sharp(imgBuffer)
+        .resize(800)
+        .webp({quality:80})
+        .toBuffer()
+        // Convertir el buffer comprimido a base64 para almacenarlo en MongoDB
+        const compressedBase64Image = `data:image/webp;base64,${compressedImageBuffer.toString('base64')}`;
+        //almacena en base de datos
+        console.log(compressedBase64Image);
+        res.status(200).json({success : 'se carga la imagen'})
+    }
+    catch(e){res.status(400).json({error: e.message})}
 }
