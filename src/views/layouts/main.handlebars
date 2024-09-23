@@ -14,7 +14,8 @@
         </a>
         <div>
             {{!-- ruta y el valor son dinamicos, segun la vista --}}
-            <a href="/register" class="btn-dynamic">Registrarse</a>
+            {{!-- <a href="/register" class="btn-dynamic" id="btnRegister">Registrarse</a>
+            <span class="btn-dynamic" id="btnName">My name</span> --}}
             <div class="dropdown">
                 <button class="dropdown-toggle">
                     <span>▼</span> <!-- Flecha para activar el menú -->
@@ -52,7 +53,6 @@
             console.log(res)
             if(res.success){
                 window.location.href = '/'
-                console.log('se elimino el token')
             }
         })
         .catch(e => console.log(e))

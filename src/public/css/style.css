@@ -339,6 +339,9 @@ input[type="password"] {
     margin: 200px auto;
 
 }
+.none{
+    display: none;
+}
 @media screen and (max-width: 640px) {
     .profile-content {
         flex-direction: column;

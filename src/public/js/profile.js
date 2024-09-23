@@ -37,3 +37,9 @@ const handleEditUser = ()=>{
 }
 const inputFile = document.getElementById('file-input')
 inputFile.addEventListener('change',handleLoadImg)
+
+//set nameuser in the header
+// const btnName = window.document.getElementById('btnName')
+// const cardName = window.document.querySelector('.profile-name')
+// btnName.textContent = cardName.textContent
+
