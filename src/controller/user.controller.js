@@ -1,4 +1,5 @@
 import {getAllUser,getUserId,editUser} from '../model/mongodb/mongo.model.js';
+import sharp from 'sharp';
 //obtener el idUser del parms/cookie y render views
 export const setProfile = async (req,res)=>{
     const idUser = req.params.userId
@@ -51,22 +52,20 @@ export const editProfile = async (req,res)=>{
     catch(e){ res.status(400).json({error: e.message})}
 }
 export const changeImg = async(req,res) => {
-    const userId = req.params.userId
-    const img = req.body
-    console.log(userId);
     try{
-        //convertir la img a buffer para usar sharp
-        const imgBuffer = Buffer.from(img.split(','[1],'base64'))
-        //comprimir img y convertirla a formato wbp
-        const compressedImageBuffer = await sharp(imgBuffer)
-        .resize(800)
-        .webp({quality:80})
+        const userId = req.params.userId
+        const file = req.file
+        if(!file) res.status(400).json({error: 'no se subio archivo'})
+        // convertir la img en webp para reducir tamaño
+        const compressImg = await sharp(file.buffer)
+        .webp({quality : 80})
         .toBuffer()
-        // Convertir el buffer comprimido a base64 para almacenarlo en MongoDB
-        const compressedBase64Image = `data:image/webp;base64,${compressedImageBuffer.toString('base64')}`;
-        //almacena en base de datos
-        console.log(compressedBase64Image);
-        res.status(200).json({success : 'se carga la imagen'})
+        // Convertir a base64 para almacenar en MongoDB
+        const base64Img = compressImg.toString('base64');
+        const imgUrl = `data:${file.mimetype};base64,${base64Img}`;
+
+        await editUser(userId, {img : imgUrl})
+        res.status(200).json({success : 'se subio la imagen'})
     }
     catch(e){res.status(400).json({error: e.message})}
 }
