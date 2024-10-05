@@ -20,7 +20,8 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 app.use(express.static(__dirname + '/public'))
 
-
+authRouter.post('/register', register)
+authRouter.post('/login', login)
 app.use('/auth',authRouter)//las request for auth
 app.use('/user',userRouter)//view and request for user
 app.use('/',viewRouter)//las view for auth
