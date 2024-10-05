@@ -4,22 +4,16 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th class="hidden-on-mobile">Rol</th>
-                    <th>Modificar</th>
+                    <th>Rol</th>
+                    <th class="hidden-on-mobile">Email</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Ejemplo de datos, puedes reemplazar con los datos dinámicos -->
                 {{#each allUsers}}
                     <tr>
                         <td>{{this.name}}</td>
-                        <td class="hidden-on-mobile">{{this.rol}}</td>
-                        <td>
-                            <div class="actions">
-                                <span class="edit-btn">Editar</span>
-                                <span class="delete-btn">Eliminar</span>
-                            </div>
-                        </td>
+                        <td>{{this.rol}}</td>
+                        <td class="hidden-on-mobile">{{this.email}}</td>
                     </tr>
                 {{/each}}
             </tbody>
