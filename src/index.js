@@ -3,9 +3,9 @@ import cookieParser from 'cookie-parser';
 import handlebars from 'express-handlebars';
 import cors from 'cors';
 import {__dirname} from './utils.js';
-import {authRouter} from './router/auth.router.js';
-import {viewRouter} from './router/view.router.js';
-import {userRouter} from './router/user.router.js';
+import {authRouter} from './Router/auth.router.js';
+import {viewRouter} from './Router/view.router.js';
+import {userRouter} from './Router/user.router.js';
 const app = express()
 const PORT = process.env.PORT || 8080
 
