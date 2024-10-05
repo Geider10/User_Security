@@ -2,10 +2,10 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import handlebars from 'express-handlebars';
 import cors from 'cors';
-import {__dirname} from './utils.js';
-import {authRouter} from './router/auth.router.js';
-import {viewRouter} from './router/view.router.js';
-import {userRouter} from './router/user.router.js';
+import {__dirname} from './src/utils.js';
+import {authRouter} from './src/router/auth.router.js';
+import {viewRouter} from './src/router/view.router.js';
+import {userRouter} from './src/router/user.router.js';
 const app = express()
 const PORT = process.env.PORT || 8080
 
@@ -20,8 +20,6 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 app.use(express.static(__dirname + '/public'))
 
-authRouter.post('/register', register)
-authRouter.post('/login', login)
 app.use('/auth',authRouter)//las request for auth
 app.use('/user',userRouter)//view and request for user
 app.use('/',viewRouter)//las view for auth
