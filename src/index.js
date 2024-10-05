@@ -21,8 +21,8 @@ app.set("view engine", "handlebars");
 app.use(express.static(__dirname + '/public'))
 
 
-app.use('/',viewRouter)//las view for auth
-app.use("/auth",authRouter)//las request for auth
+app.use('/auth',authRouter)//las request for auth
 app.use('/user',userRouter)//view and request for user
+app.use('/',viewRouter)//las view for auth
 
 app.listen(PORT,()=> console.log("se levanto el server"))
